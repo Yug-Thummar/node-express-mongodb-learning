@@ -1,0 +1,35 @@
+<!-- GET 
+send to get some response
+data sent in query strings(limited,string data & visible in url)
+	Limited (URL length limit)
+
+POST 
+used to post something (for create/write/update)
+data sent via request body (any type of data) 
+Can send large amounts of data -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>GET request</h1>
+    <form action="http://localhost:8080/register" method="get">
+        <input type="text" name="name" placeholder="Enter your name">
+        <input type="password" name="pass" placeholder="Enter your password">
+        <button>Submit</button>
+    </form>
+    <br>
+    <h1>POST request</h1>
+    <form action="http://localhost:8080/register" method="post">
+        <input type="text" name="name" placeholder="Enter your name">
+        <input type="password" name="pass" placeholder="Enter your password">
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>

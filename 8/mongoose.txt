@@ -1,0 +1,4 @@
+what is mongoose 
+-->mongoose  is used to connect js and mongodb 
+mongoose uses operation buffering
+-->mongoose lets your start using your models immediately,without waiting for mongoose to establish a connection to mongodb

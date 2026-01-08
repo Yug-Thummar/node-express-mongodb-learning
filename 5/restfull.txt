@@ -1,0 +1,15 @@
+REST : representational state transfer 
+-->REST is an architectural style that defines a set of constraints to be used for creating web services.
+GET : Retrives resources.
+POST : submits the new data to the server.
+PUT : updates existing data.
+PATCH : updates existing data partically.
+DELETE : removes data.
+resource <--user -->resource means operation like CRUD operation   
+
+creating RESTful API
+GET : /posts to fet data for all posts
+POST : /posts to add a new posts
+GET : /posts/:id to get one post(using id)
+PATCH : /post/:id to update specific post
+DELETE : /post/:id to delete specific post

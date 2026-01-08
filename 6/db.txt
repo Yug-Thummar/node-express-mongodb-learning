@@ -1,0 +1,315 @@
+what is sql
+-->sql stands for : structure query language. 
+mysql is not a language.
+mysql(db)mysql is file.and file can not directly access.talk to db<--- sql(language)
+
+what is database ?
+-->it is collection of data in a formate that can be easily accessed.
+why database
+-->can store large amount of data
+-->features like security,scalability etc..
+-->easier to delete,update,insert or search 
+eg.think of like that goverment store the large amount of data like physical file. slowly slowly change to physical to digital data store like computer.
+
+what is dbms.
+-->dbms means manage the data.think of like it we can have large amount of data.but only for data.but not handle manually.dbms handle the database   database --> dbms 
+
+sql v/s nosql                                    
+sql
+-->relational database (data stored in tables)
+eg - MySQL ,oracle,postgreSQL etc.
+NoSQL 
+non relational database (data stored in document/key-value/graphs etc.)
+eg-MongoDB,cassandra,Neo4j etc.
+
+
+
+1)how to database create 
+-->CREATE DATABASE db_name
+-->create database db_name
+
+2)how to database delete 
+-->DROP DATABASE db_name
+
+3)how to use database
+-->USE db_name
+
+4)how to create a table name 
+-->create table table_name(
+    column_name1 datatype constraint,
+    column_name2 datatype constraint,
+    column_name3 datatype constraint
+);
+
+5)how to insert table value 
+insert into table_name
+value
+(101,"yug",18),
+(101,"utsav",19); 
+
+6)how to table show
+-->select column_name1 column_name2 from table_name
+-->select * from table_name;
+-->select distinct column_name1 from table_name  -->distinct are remove duplicate value.
+
+7)create database db_name;
+create database if not exists db_name; -->this query means if database are already exists not create a database but database are not exists then create a database.
+
+8)DROP database db_name;
+DROP database if exists db_name; -->this means if database exists then delete database.but database are not exists then given warning.
+
+9)how to show all database & table
+-->show databases;
+-->show tables;
+
+10)table queries : create , insert , update , alter , truncate , delete 
+-->1)ALTER : 
+     ALTER is used to change an existing table — like adding, removing, or changing a column.
+     1)how to add column name :
+     --> alter table student add marks int;
+     2)how to rename column name : 
+     --> alter table student rename enroll_number to roll_number;
+     3)how to rename table name :
+     --> alter table student rename new-table_name;
+     4)how to change datatype : 
+     --> alter table student modify marks float;
+     5)how to remove column :
+     --> alter table student drop column marks;
+
+11)constraint : rules for data in the table 
+not null : columns can not have a null value
+unique : all values in column are different
+defualt : sets the defualt value of a column.
+check : it can limit the values allowed in a tupple_name datatype defualt values;
+-->example :
+            create database company;
+
+            use company;
+
+            create table employees(
+            id int unique,
+            name varchar(20) not null,
+            email varchar(50),
+            salary int default 3000,
+            age int,
+            constraint age_check check (age >= 18)
+            );
+
+            drop table employees;
+
+            INSERT INTO employees (id, name, email, age)
+            VALUES
+            (1, "yug", "yugthummar432@gail.com", 20),
+            (2, "krishna", "krishna343@gmail.com", 23);
+            
+            select * from employees;
+12)what is key : key are special column in the table
+primary key :  Think of a Primary Key like your Aadhaar number.
+               It is unique for every Indian citizen.
+               cannot have two people with the same Aadhaar number.
+               It helps the government identify you uniquely.
+               ➡️ In a database, the Primary Key is used to uniquely identify each row in a table.
+
+        CREATE TABLE Students (
+        StudentID INT PRIMARY KEY,
+        Name VARCHAR(100)
+        );
+ 
+foreign key :   Now think of a Foreign Key as a reference to someone else’s Aadhaar.
+                For example, in your school record, your teacher might write your father’s Aadhaar number for reference.
+                Your father’s Aadhaar is not unique in your record, but it is a valid Aadhaar from another person (another table).
+                ➡️ In databases, a Foreign Key connects one table to another using a valid reference.
+                Create a Books table where each book has a unique BookID and a Title.
+primary key : it is a column (or set of column) in a table that uniquely identifies each row.(a unique id)
+there is only  1 PK & it should be NOT null.
+foreign key : a foreign key is a column(or set of column)in a table that refers to the primary key in another table.
+FKs can have duplicate & null values.
+there can be multiple FKs.
+
+13)WHERE clause : The WHERE clause in SQL is used to filter records. It returns only the rows that meet a specific condition.
+🔹 Basic Syntax:
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+🔹 Example:
+SELECT * FROM students
+WHERE age > 18;
+➡️ This query returns all students whose age is greater than 18.
+
+14)where clause operators :
+-->arithmatic operators : +(addition), -(subtraction),*(multiplication),/(division),%(modulus)
+-->comparison operators : =(equal to),!=(not equal to),>,<,<=,>=
+-->logical operators : AND ,OR,NOT,IN ,BETWEEN,ALL,LIKE,ANY
+-->bitwise operators : &(bitwise AND),| (bitwise or)
+
+15)where clause frequently used operators
+AND(to check for both condition to be true)
+or(to check for one of the condition to be true)
+BETWEEN(select for a given range)
+in(matches any value in the list)
+not(to nagate the given condition)
+
+16)order by clause : to sort in ascending (ASC) or descending order (DESC).
+-->select column1,column2 from table_name
+    order by column_name(s) ASC,DESC;
+
+17)LIMIT clause : set an upper limit on number of (tuples) rows to be retuened.
+-->SELECT column1,column2 from table_name limit number
+
+18)aggregate functions :"to group together and summarize". perform a calculation on a set of values,and return a singal value.
+-->count()
+-->sum()
+-->max()
+-->min()
+-->avg()
+example : select max(follower)
+
+19)group by clause :  
+                    -->groups rows that have the same values into summary rows.
+                    -->it collects data fOR multiple records and groups the result by one or more column.
+                    -->select column_name1,column_name2 form table_name
+                    group by column_name(s);
+                    -->genereally we use group by with some aggregation function.
+
+20)having clause : having clause apply for groups condition
+                  --> similar to where i.e. applies some condition on rows.
+                  -->but it is used when we want to apply any condition after grouping.
+                  select column_name1,column_name2
+                  from table_name
+                  group by column_name(s)
+                  having condition;
+                
+21)general order : select(column(s))
+                   from(column)
+                   where(column)
+                   group by(column(s))
+                   having(condition)
+                   order by(column(s)) ASC; 
+
+22)update : to update existing rows.
+-->update table_name
+   set column_name1 = value, column_name2 = value
+   where condition;
+-->delete : to delete existing rows
+   delete from table_name
+   where condition;
+-->truncate : to delete table data not the delete table.
+   truncate table table_name;
+
+practice QS :
+-->create a database for your college.
+-->create a table named teacher to store (id,name,subject,salary)
+-->insert following data in the table : 
+23,"ajay","math",50000
+47,"bharat","english",60000
+18,"chetan","chemistry",45000
+9,"divya","physics",75000
+1)-->select teachers whose salary is more than 55k.
+2)-->rename the salary column of teacher table to ctc.
+3)-->update salary of all teachers by giving them an increment of 25%.
+4)-->add a new column for teachers called city.the default city should br "Gurgaon".
+5)-->delete the salary column for teacher table.
+
+-->answer : 
+create database college;
+
+use college;
+
+create table teacher(
+    id int, 
+    name varchar(30),
+    subject varchar(50),
+    salary int
+);
+
+insert into teacher
+(id,name,subject,salary)
+values
+(23,"ajay","math",50000),
+(47,"bharat","english",60000),
+(18,"chetan","chemistry",45000),
+(9,"divya","physics",75000);
+
+select name,salary
+from teacher
+where salary > 50000;
+
+alter table teacher rename column salary to ctc;
+
+update teacher 
+set ctc = ctc + 0.25 * ctc;
+select * from teacher;
+
+alter table teacher add city varchar(30) default "Gurgaon";
+
+alter table teacher drop column ctc;
+
+practice Qs :
+create a table to store student info (roll_no,name,city,marks).
+insert following data in the table:
+110,"adam","delhi",76
+108,"bob","mumbai",65
+124,"casey","pune",94
+112,"duke","pune",80
+1)-->select all students who scored 75+.
+2)-->find names of all cities where student are from.
+3)-->find the maximum marks of student from each city.
+4)-->find the average of the class
+5)-->add a new column grade,assign grade such that :
+marks > 80, grade = O
+marks 70-80, grade = A
+marks 60-70,grade = B 
+
+
+-->answer :
+create table student(
+    roll_no int,
+    name varchar(40),
+    city varchar(30),
+    marks int
+);
+insert into student
+(roll_no,name,city,marks)
+values
+(110,"adam","delhi",76),
+(108,"bob","mumbai",65),
+(124,"casey","pune",94),
+(112,"duke","pune",80);
+
+select * from student
+where marks > 75;
+
+select distinct city from student;
+
+select city,max(marks)
+from student
+group by city;
+
+alter table student add grade varchar(2);
+
+update student 
+set grade = "O"
+where marks > 80;
+
+update student 
+set grade = "A"
+where marks >= 70 AND marks <= 80;
+
+update student 
+set grade = "B"
+where marks >= 60 AND marks <= 70;
+
+
+"-------------------------"Node with SQL"----------------------------
+faker is generate a fake data
+
+client ---->server------>database
+-->client not directly connected to database.client request a server and server request the database.but database and server are not link server work on node and database work on sql query.so server and database connected to install npm i mysql2.which connected server and database.
+-->in mysql2 included createConnection() name  
+how to mysql workbench here -->mysql -u root -p;
+how to run sql in js node index.js
+how many type's to run mysql
+1)workbench
+2)mysql package ->node.js
+3)CLI 
+4)using sql_files ->run->create a sql file. and write sql query. open terminal write the command "mysql -u root -p". enter a password. choose database and run command->"source file_name"

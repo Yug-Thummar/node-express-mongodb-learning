@@ -1,0 +1,35 @@
+what is node REPL 
+-->Read ,Evalute , Print ,Loop 
+if i open terminal and simply write the node. it means you enter a js world. you write "ls" command or any other command on terminal not work. after writing the node you enter js world and perform the js operation. only for java script runtime enviroment you think i performm the operation DOM object but not possible becuase the DOM is only for run browser 
+C:\Users\yugth>node
+Welcome to Node.js v22.17.0.
+Type ".help" for more information.
+> 1 + 3
+4
+> "hello";
+'hello'
+> ls
+Uncaught ReferenceError: ls is not defined
+> window
+Uncaught ReferenceError: window is not defined
+
+
+process : This object provides information about,and control over ,the current Node.js process.
+process.agrv : returns an array containing the command-line arguments passes when the Node.js process was launched
+
+
+packages.json : the package.json file contains descriptive and functional metadata about a project,such as a name,version,and dependencies
+npm init 
+node_modules : the node_modules folder contains every installed dependency for your project.
+
+package-lock.json : it records the exact version of every installed dependency,including its sub-dependencies and their versions
+how to installing packages local 
+
+-->in folder write npm install "packages name"
+how to installing packages global
+--> write npm -g install "packages name" but packages not  
+
+require v/s import
+-->import{sum}from "./math.js"
+-->we can't selectively load only the pieces we need with require but with import,we can selectively load only the pieces we need,which can save memory.
+loading is synchronous for 'require' but can be asynchronous for 'import'

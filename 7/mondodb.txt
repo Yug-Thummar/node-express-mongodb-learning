@@ -1,0 +1,312 @@
+1)how to verify mongodb ?
+-->mongod --version
+
+2)how to open shell ?,and why shell use it ?
+-->mongosh open shell and shell is used to mongodb operations.
+
+3)by default mongo database name ?
+-->test
+
+4)test database store the data permanently ?
+-->no,test database are not store the data permanently.but the store the data temporary.
+
+5)how can i show mongodb command ?
+-->type the keyword "help" and all mongodb command show you.and use it.
+
+6)how can i create database ?
+-->use database_name
+
+7)when data is store the permanently
+-->whenever we insert the data in database data store the permanently.
+
+8)what is  the full form of BSON ? 
+-->BSON stands for a binary json(javascript object notation).
+
+9)in mongodb what type of the store data ?
+-->in mongodb data store BSON formate not json formate.it similar to json but not exectly json formate.
+
+10)collection : 
+                document : mongo stores data in form of documents(bson document).
+                collection : mongodb stores document in collection.
+
+11)insert in db 
+-->db.collection.insertOne() insert a single document into a collection.
+show collection
+db.student.insertOne({name:"yug",marks:45})
+db.student.find() -->show the data 
+
+use student
+db.student.insertOne({name:"yug",age:12,marks:67}) <-- this means insert a data
+{
+  acknowledged: true,
+  insertedId: ObjectId('6876422e42c953a2c8718dc4')  <-- thsi is the primary key unique and not null.
+}
+db.student.find() <-- this means show the data
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67
+  }
+]
+db.student.insertOne({name:"utsav",city:"ahmedabad",address:"nikol"}) <--column name change anywhere
+{
+  acknowledged: true,
+  insertedId: ObjectId('6876427442c953a2c8718dc5')
+}
+db.student.find()
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  }
+]
+
+12) how to insert multiple data 
+ db.student.insertMany([{name:"krishna",marks:67,city:"delhi"},{name:"darshan",marks:89,city:"mumbai"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('687647d842c953a2c8718dc6'),
+    '1': ObjectId('687647d842c953a2c8718dc7')
+  }
+}
+
+13)find in db
+-->db.collection.find() -->returns everything
+for specific queries
+db.collection.find({key:value}) <--return cursor(references to original)
+db.collection.findOne({key:value}) <--return actual document
+
+14)query operators
+-->find student where marks > 75
+ db.student.find({marks : {$gt : 65}})
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 67,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+-->find student who live in delhi or mumbai
+ db.student.find({city : {$in :["delhi","mumbai"] } } )
+[
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 67,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+-->find student who scored 65 or live in delhi
+db.student.find({$or : [{marks : {$gt : 65}},{city : "delhi"}]})
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 67,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+
+15)update in db
+db.collection.updateOne(<query>,<update>,<options>) : updates at most a single document that much a specified filter even though multiple documents may match specified filter.
+db.collection.updateMany() : update all documents that match a specified filter.
+db.collection.replaceOne() : replace at most a single document that match a specified filter evenn though multiple documents may match the specified filter.
+
+-->example 
+1) db.student.updateOne({name:"krishna"},{$set : {marks : 99}})
+  db.student.find()
+[ 
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 99,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+2) db.student.updateOne({name:"yug"},{$set : {city : "delhi"}})
+--> db.student.find()
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 99,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+3) db.student.updateOne({city:"delhi"},{$set : {city : "new delhi"}})
+--> db.student.find()
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67,
+    city: 'new delhi'
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc6'),
+    name: 'krishna',
+    marks: 99,
+    city: 'delhi'
+  },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+4)  db.student.replaceOne({marks : {$gt : 88}},{name : "bavanji"})
+--> db.student.find()
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67,
+    city: 'new delhi'
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  },
+  { _id: ObjectId('687647d842c953a2c8718dc6'), name: 'bavanji' },
+  {
+    _id: ObjectId('687647d842c953a2c8718dc7'),
+    name: 'darshan',
+    marks: 89,
+    city: 'mumbai'
+  }
+]
+
+5)db.student.replaceMany({marks : {$gt : 88}},{name : "bavanji"})
+-->TypeError: db.student.replaceMany is not a function
+6) db.student.replaceOne({marks : {$gt : 88}},{name : "bavanji"})
+--> db.student.find()
+[
+  {
+    _id: ObjectId('6876422e42c953a2c8718dc4'),
+    name: 'yug',
+    age: 12,
+    marks: 67,
+    city: 'new delhi'
+  },
+  {
+    _id: ObjectId('6876427442c953a2c8718dc5'),
+    name: 'utsav',
+    city: 'ahmedabad',
+    address: 'nikol'
+  },
+  { _id: ObjectId('687647d842c953a2c8718dc6'), name: 'bavanji' },
+  { _id: ObjectId('687647d842c953a2c8718dc7'), name: 'bavanji' }
+]
+
+16)nesting database object
+-->  db.student.insertOne({name : "Nikhil",performance : {marks : 90, age : 18}})
+--> db.student.find({"performance.age" : 18})
+[
+  {
+    _id: ObjectId('68787888ad2007bc93718dc9'),
+    name: 'farah',
+    performance: { marks: 90, age: 18 }
+  },
+  {
+    _id: ObjectId('68787961ad2007bc93718dca'),
+    name: 'Nikhil',
+    performance: { marks: 90, age: 18 }
+  }
+]
+
+17)delete database
+--> db.student.deleteOne({name : "farah"}) -->delete this rows who exist name "farah"
+--> db.student.deleteMany({marks : {$gt : 66}})
+
+18)how to all records delete
+db.collection.deleteMany({})
